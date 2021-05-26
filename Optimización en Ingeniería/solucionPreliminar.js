@@ -1,8 +1,8 @@
 
-var principalMatrix = {
-    j1: [2, 3, 1],
-    j2: [1, 5, 4]
-}
+// var principalMatrix = {
+//     j1: [2, 3, 1],
+//     j2: [1, 5, 4]
+// }
 // var principalMatrix = {
 //     j1: [54, 83, 15, 71, 77, 36, 53, 38, 27, 87, 76, 91, 14, 29, 12, 77, 32, 87, 68, 94],
 //     j2: [79,  3, 11, 99, 56, 70, 99, 60,  5, 56,  3, 61, 73, 75, 47, 14, 21, 86,  5, 77],
@@ -21,23 +21,34 @@ var principalMatrix = {
 
 //https://sci-hub.se/https://www.jstor.org/stable/3007887?seq=1
 // Se logra obtener el mismo tiempo
+// var principalMatrix = {
+//     j1: [3, 10, 4],
+//     j2: [30, 4, 5],
+//     j3: [2, 5, 3]
+// }
+//https://www.sciencedirect.com/science/article/pii/S187770581201939X
+// Con método heurístico se aproxima, pero no es exacto, según el paper da 49.
 var principalMatrix = {
-    j1: [3, 10, 4],
-    j2: [30, 4, 5],
-    j3: [2, 5, 3]
+    j1: [10, 2, 7, 2, 5],
+    j2: [ 8, 3, 6, 5, 9],
+    j3: [ 3, 7, 1, 3, 4],
+    j4: [ 5, 4, 2, 1, 6]
 }
+
 
 var machines = principalMatrix.j1.length;
 var _jobsKeys = Object.keys(principalMatrix);
 var combinations = perm(_jobsKeys);
-//console.log("Combinaciones: ", combinations);
+console.log("Combinaciones: ", combinations[22]);
 var jobsQ = _jobsKeys.length;
 
 console.log("Maquinas: ", machines, " Jobs: ", jobsQ);
 var permTimings = {};
 
 var matrixTimings = {};
+var matrixPermutationTimings = [];
 for (var k = 0; k < combinations.length; k++) {
+    matrixTimings = {};
     var jobsKeys = combinations[k];
     for (var j = 0; j < jobsQ; j++) {
         var jobsTiming = [];
@@ -78,12 +89,13 @@ for (var k = 0; k < combinations.length; k++) {
     }
     // guardamos el último tiempo de la última máquina del último trabajo
     permTimings[k] = matrixTimings[jobsKeys[jobsQ-1]][machines-1][1];
+    matrixPermutationTimings.push(matrixTimings);
 }
-console.log("Tiempos: ", matrixTimings);
-//console.log("Tiempos de las permutaciones: ", permTimings);
+//console.log("Tiempos: ", matrixTimings);
+console.log("Tiempos de las permutaciones: ", permTimings);
 var a = Object.keys(permTimings).reduce((a, b) => permTimings[a] <= permTimings[b] ? a : b);
 console.log("Mejor permutación: ", a, " Tiempo: ", permTimings[a] )
-
+console.log(matrixPermutationTimings[a]);
 
 // función que obtiene todas las permutaciones de un arreglo, esto escala n!
 function perm(xs) {
