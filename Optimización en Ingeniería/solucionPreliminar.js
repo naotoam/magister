@@ -6,13 +6,13 @@
 // Tiempo obtenido: 1278
 // Tiempo de ejecución: 0.088 sec
 // Comentario: Se obtiene el mismo tiempo que en el paper
-var principalMatrix = {
-    j1: [27, 92, 75, 94, 18, 41, 37, 58, 56, 20,  2, 39, 91, 81, 33, 14, 88, 22, 36, 65],
-    j2: [79, 23, 66,  5, 15, 51,  2, 81, 12, 40, 59, 32, 16, 87, 78, 41, 43, 94,  1, 93],
-    j3: [22, 93, 62, 53, 30, 34, 27, 30, 54, 77, 24, 47, 39, 66, 41, 46, 24, 23, 68, 50],
-    j4: [93, 22, 64, 81, 94, 97, 54, 82, 11, 91, 23, 32, 26, 22, 12, 23, 34, 87, 59,  2],
-    j5: [38, 84, 62, 10, 11, 93, 57, 81, 10, 40, 62, 49, 90, 34, 11, 81, 51, 21, 39, 27]
-}
+// var principalMatrix = {
+//     j1: [27, 92, 75, 94, 18, 41, 37, 58, 56, 20,  2, 39, 91, 81, 33, 14, 88, 22, 36, 65],
+//     j2: [79, 23, 66,  5, 15, 51,  2, 81, 12, 40, 59, 32, 16, 87, 78, 41, 43, 94,  1, 93],
+//     j3: [22, 93, 62, 53, 30, 34, 27, 30, 54, 77, 24, 47, 39, 66, 41, 46, 24, 23, 68, 50],
+//     j4: [93, 22, 64, 81, 94, 97, 54, 82, 11, 91, 23, 32, 26, 22, 12, 23, 34, 87, 59,  2],
+//     j5: [38, 84, 62, 10, 11, 93, 57, 81, 10, 40, 62, 49, 90, 34, 11, 81, 51, 21, 39, 27]
+// }
 
 // # 2 : Time seed 573109518
 // Tiempo obtenido: 1438
@@ -105,6 +105,17 @@ var principalMatrix = {
 // }
 
 
+//https://www.researchgate.net/publication/324160684_Application_of_Branch_and_Bound_algorithm_for_solving_flow_shop_scheduling_problem_comparing_it_with_Tabu_search_algorithm
+// método de branch & bound 
+// se obtiene el mismo valor y misma permutación
+var principalMatrix = {
+    j1: [77, 11, 82],
+    j2: [34, 92,  8],
+    j3: [88, 36, 30],
+    j4: [ 1 ,98 , 9]
+}
+
+
 var machines = principalMatrix.j1.length;
 var _jobsKeys = Object.keys(principalMatrix);
 var combinations = perm(_jobsKeys);
@@ -164,7 +175,7 @@ for (var k = 0; k < combinations.length; k++) {
 console.log("Tiempos de las permutaciones: ", permTimings);
 var a = Object.keys(permTimings).reduce((a, b) => permTimings[a] <= permTimings[b] ? a : b);
 console.log("Mejor permutación: ", a, " Tiempo: ", permTimings[a] )
-//console.log(matrixPermutationTimings[a]);
+console.log(matrixPermutationTimings[a]);
 
 // función que obtiene todas las permutaciones de un arreglo, esto escala n!
 function perm(xs) {
