@@ -1,17 +1,20 @@
 //var randomInterger = Math.floor(Math.random() * 100) + 1;
-const sets = 10;
+const mM = 99999999999;
+const mJ = 5;
 BeginTest();
 
 
 function BeginTest(){
-    for(var maxMachine = 1; maxMachine < sets; maxMachine++){
-        for(var maxJobs = 1; maxJobs < sets; maxJobs++){
-            console.log("Máquinas: "+maxMachine, "Jobs: ",maxJobs)
+    for(var maxMachine = 500000; maxMachine < mM; maxMachine += 100000){
+        for(var maxJobs = 2; maxJobs < mJ; maxJobs++){
+            //console.log(maxMachine+","+maxJobs)
             var matrix = CreateMatrix(maxMachine, maxJobs);
-            console.time('Perfomance')
+            var start = +new Date();
+            //console.time('Perfomance')
             Execute(matrix);
-            console.log("-------------------------------");
-            console.timeEnd('Perfomance')
+            var end = +new Date();
+            console.log(`${maxMachine},${maxJobs},${end - start}`);
+            //console.timeEnd('Perfomance')
         }
     }
 }
@@ -26,7 +29,7 @@ function CreateMatrix (maxMachines, maxJobs) {
         
         principalMatrix["j"+job] = machineTimes;
     }
-    console.log("Matriz de tiempos: ", principalMatrix);
+    //console.log("Matriz de tiempos: ", principalMatrix);
     return principalMatrix;
 }
 
@@ -89,8 +92,8 @@ function Execute(principalMatrix) {
     //console.log("Tiempos: ", matrixTimings);
     //console.log("Tiempos de las permutaciones: ", permTimings);
     var a = Object.keys(permTimings).reduce((a, b) => permTimings[a] <= permTimings[b] ? a : b);
-    console.log("Mejor permutación: ", a, " Tiempo: ", permTimings[a]);
-    console.log(combinations[a]);
+    //console.log("Mejor permutación: ", a, " Tiempo: ", permTimings[a]);
+    //console.log(combinations[a]);
     //console.log(matrixPermutationTimings[a]);
 
     // función que obtiene todas las permutaciones de un arreglo, esto escala n!
