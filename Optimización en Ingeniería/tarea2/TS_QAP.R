@@ -12,7 +12,7 @@ BuscarVecinoTabu <- function(tabuArr, sv, fit, i = 1){
   }
   new_sv = sort(sv, decreasing = F)
   temporal = 0
-  for (j in 1:length(sv)) {
+  for (j in 2:length(sv)) {
     min = new_sv[j]
     pos_real = match(c(min), sv)
     if(tabuArr[pos_real][i] == 0){
@@ -44,13 +44,13 @@ TS_QAP<-function(filename, repeticiones){
   
   instancia<-readQAP(filename)
 
-  tabu_medium <- list()
+  #tabu_medium <- list()
   rep <- 0
   sol <- sample(1:instancia$n,instancia$n,replace=F)
   fitness<-evaluarQAP(sol,instancia$f,instancia$d)
   largo = length(sol)
-  tabu_long <- matrix(0, nrow = length(sol), ncol = largo)
-  tabu_short <- matrix(0, nrow = length(sol), ncol = largo)
+  tabu_long <- matrix(0, nrow = largo, ncol = largo)
+  tabu_short <- matrix(0, nrow = largo, ncol = largo)
   print("solucion inicial")
   print(sol)
   #variables que deben ser dinámicas
@@ -71,11 +71,10 @@ TS_QAP<-function(filename, repeticiones){
     #print("soluciones vecinas")
     #print(sv)
     #encuentro la posición del swap realizado
-    mejor_vecino <- which.min(sv)
     #guardo este movimiento en la memoria de corto plazo si es que no lo ha sido anteriormente
     p = BuscarVecinoTabu(tabu_short, sv, fitness, 1)
     pos = as.integer(p["pos"])
-    tabu_short[pos, pos+1] = t_corto
+    tabu_short[pos,pos+1] = t_corto
     tabu_short = apply(tabu_short,c(1, 2), restar)
     sol <-swap(sol,pos, pos+1)
     rep <- rep + 1
@@ -84,5 +83,4 @@ TS_QAP<-function(filename, repeticiones){
   return(list(ts = tabu_short, sol = sol, fit = e))
 }
 
-TS_QAP('bur26a.dat', 10)
-
+TS_QAP('bur26a.dat', 20)
