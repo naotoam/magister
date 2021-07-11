@@ -1,4 +1,4 @@
-SA_QAP<-function(filename, alpha, T_max, T_min, iteraciones, repetitions, 1){
+SA_QAP<-function(filename, alpha, T_max, T_min, iteraciones, repetitions, grafico = 1){
   
   
   instancia<-readQAP(filename)
@@ -65,3 +65,5 @@ SA_QAP<-function(filename, alpha, T_max, T_min, iteraciones, repetitions, 1){
   A<-transform(a, mejor = as.numeric(mejor))
   return(A)
 }
+
+SA_QAP("bur26a.dat", 0.8, 1000000, 10, 10, 100)
