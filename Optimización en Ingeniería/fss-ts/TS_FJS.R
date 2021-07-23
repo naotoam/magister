@@ -152,6 +152,6 @@ TS_FJS<-function(filename, tiempoLocal, tiempoEspacio, intensidad, mCorto, mLarg
   return(list(ts = tabu_short, sol = sol, fit = e, tsm = tabu_long))
 }
 
-TS_FJS('data2.dat', tiempoLocal = 3, tiempoEspacio = 10, intensidad = 10, mCorto = 5, mLargo = 10, penalizacion = 0.5, nVecinos =  25)
+TS_FJS('data3.dat', tiempoLocal = 10, tiempoEspacio = 10, intensidad = 20, mCorto = 10, mLargo = 20, penalizacion = 0.5, nVecinos =  10)
 
 

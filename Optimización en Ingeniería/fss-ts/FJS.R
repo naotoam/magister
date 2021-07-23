@@ -22,8 +22,6 @@ evaluarFJS<-function(instancia, jobs, machines){
     jobsTiming <- matrix(nrow = 1, ncol = machines*2)
     for(i in 1:machines){
       if(i == 1 & j == 1){
-        pair[1] = 0
-        pair[2] = instancia[1,1]
         jobsTiming[1,2*i-1] = 0
         jobsTiming[1,2*i] = instancia[1,1]
       }
