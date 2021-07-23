@@ -51,18 +51,18 @@
 // }
 
 // FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
-var principalMatrix = {
-    j1: [74, 21, 58,  4, 21, 28, 58, 83, 31, 61, 94, 44, 97, 94, 66,  6, 37, 22, 99, 83],
-    j2: [28,  3, 27, 61, 34, 76, 64, 87, 54, 98, 76, 41, 70, 43, 42, 79, 88, 15, 49, 72],
-    j3: [89, 52, 56, 13,  7, 32, 32, 98, 46, 60, 23, 87,  7, 36, 26, 85,  7, 34, 36, 48],
-    j4: [60, 88, 26, 58, 76, 98, 29, 47, 79, 26, 19, 48, 95, 78, 77, 90, 24, 10, 85, 55],
-    j5: [54, 66, 12, 57, 70, 82, 99, 84, 16, 41, 23, 11, 68, 58, 30,  5,  5, 39, 58, 31],
-    j6: [92, 11, 54, 97, 57, 53, 65, 77, 51, 36, 53, 19, 54, 86, 40, 56, 79, 74, 24,  3],
-    j7: [9 , 8 ,88 ,72 ,27 ,22 ,50 , 2 ,49 ,82 ,93 ,96 ,43 ,13 ,60 ,11 ,37 ,91 ,84 ,67],
-    j8: [4 ,18 ,25 ,28 ,95 ,51 ,84 ,18 , 6 ,90 ,69 ,61 ,57 , 5 ,75 , 4 ,38 ,28 , 4 ,80],
-    j9: [25, 15, 91, 49, 56, 10, 62, 70, 76, 99, 58, 83, 84, 64, 74, 14, 18, 48, 96, 86],
-    j10: [15, 84,  8, 30, 95, 79,  9, 91, 76, 26, 42, 66, 70, 91, 67,  3, 98,  4, 71, 62]
-}
+// var principalMatrix = {
+//     j1: [74, 21, 58,  4, 21, 28, 58, 83, 31, 61, 94, 44, 97, 94, 66,  6, 37, 22, 99, 83],
+//     j2: [28,  3, 27, 61, 34, 76, 64, 87, 54, 98, 76, 41, 70, 43, 42, 79, 88, 15, 49, 72],
+//     j3: [89, 52, 56, 13,  7, 32, 32, 98, 46, 60, 23, 87,  7, 36, 26, 85,  7, 34, 36, 48],
+//     j4: [60, 88, 26, 58, 76, 98, 29, 47, 79, 26, 19, 48, 95, 78, 77, 90, 24, 10, 85, 55],
+//     j5: [54, 66, 12, 57, 70, 82, 99, 84, 16, 41, 23, 11, 68, 58, 30,  5,  5, 39, 58, 31],
+//     j6: [92, 11, 54, 97, 57, 53, 65, 77, 51, 36, 53, 19, 54, 86, 40, 56, 79, 74, 24,  3],
+//     j7: [9 , 8 ,88 ,72 ,27 ,22 ,50 , 2 ,49 ,82 ,93 ,96 ,43 ,13 ,60 ,11 ,37 ,91 ,84 ,67],
+//     j8: [4 ,18 ,25 ,28 ,95 ,51 ,84 ,18 , 6 ,90 ,69 ,61 ,57 , 5 ,75 , 4 ,38 ,28 , 4 ,80],
+//     j9: [25, 15, 91, 49, 56, 10, 62, 70, 76, 99, 58, 83, 84, 64, 74, 14, 18, 48, 96, 86],
+//     j10: [15, 84,  8, 30, 95, 79,  9, 91, 76, 26, 42, 66, 70, 91, 67,  3, 98,  4, 71, 62]
+// }
 
 // 20 x 20 -> se congela
 // var principalMatrix = {
@@ -186,13 +186,13 @@ for (var k = 0; k < combinations.length; k++) {
         matrixTimings[jobsKeys[j]] = jobsTiming;
     }
     // guardamos el último tiempo de la última máquina del último trabajo
-    permTimings[k] = matrixTimings[jobsKeys[jobsQ-1]][machines-1][1];
+    permTimings[k] = matrixTimings[jobsKeys[jobsQ - 1]][machines - 1][1];
     matrixPermutationTimings.push(matrixTimings);
 }
 //console.log("Tiempos: ", matrixTimings);
 console.log("Tiempos de las permutaciones: ", permTimings);
 var a = Object.keys(permTimings).reduce((a, b) => permTimings[a] <= permTimings[b] ? a : b);
-console.log("Mejor permutación: ", a, " Tiempo: ", permTimings[a] )
+console.log("Mejor permutación: ", a, " Tiempo: ", permTimings[a])
 console.log(matrixPermutationTimings[a]);
 
 // función que obtiene todas las permutaciones de un arreglo, esto escala n!
