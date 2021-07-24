@@ -84,8 +84,6 @@ TS_FJS<-function(filename, tiempoLocal, tiempoEspacio, intensidad, mCorto, mLarg
   maquinas = instancia$m
   tabu_long <- matrix(0, nrow = largo, ncol = largo)
   tabu_short <- matrix(0, nrow = largo, ncol = largo)
-  print("solucion inicial")
-  print(sol)
   #variables que deben ser dinámicas
   t_corto = mCorto
   t_largo = mLargo
@@ -112,7 +110,8 @@ TS_FJS<-function(filename, tiempoLocal, tiempoEspacio, intensidad, mCorto, mLarg
           if(ij_ > (largo)){
             ij_ = ij_ - largo*factorij +1
           }
-          vecino<-swap(sol,i_, ij_)
+          #vecino<-swap(sol,i_, ij_)
+          vecino<-insert(sol,i_, ij_)
           Cvecino<-evaluarFJS(vecino, instancia$n, instancia$m)
           sv[i] <- Cvecino
         }
@@ -132,11 +131,11 @@ TS_FJS<-function(filename, tiempoLocal, tiempoEspacio, intensidad, mCorto, mLarg
           #prohibición
           tabu_short[pos,j_] = t_corto
           tabu_short = apply(tabu_short,c(1, 2), restar)
-          sol <-swap(sol,pos, j_)
+          sol <-insert(sol,pos, j_)
           tabu_long = p$tsm
           soluciones<-c(soluciones,p$fit)
+          tLocal <- tLocal + 1
         }
-        tLocal <- tLocal + 1
       }
     }
     #tabu_long = apply(tabu_long,c(1, 2), restar)
@@ -148,10 +147,10 @@ TS_FJS<-function(filename, tiempoLocal, tiempoEspacio, intensidad, mCorto, mLarg
     lines(soluciones)
   }
   #e = evaluarFJS(instancia$f, instancia$n, instancia$m)
-  e = min(soluciones)
+  e = min(soluciones, na.rm = TRUE)
   return(list(ts = tabu_short, sol = sol, fit = e, tsm = tabu_long))
 }
 
-TS_FJS('data3.dat', tiempoLocal = 10, tiempoEspacio = 10, intensidad = 20, mCorto = 10, mLargo = 20, penalizacion = 0.5, nVecinos =  10)
-
+a = TS_FJS('data4.dat', tiempoLocal = 5 , tiempoEspacio = 8, intensidad = 20, mCorto = 5, mLargo = 50, penalizacion = 0.5, nVecinos =  20)
+a$fit
 

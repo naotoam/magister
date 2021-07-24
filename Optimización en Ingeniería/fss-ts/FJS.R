@@ -8,12 +8,36 @@ readFJS<-function(name){
   return(d)
 }
 
+
+
+
 swap<-function(sol, i, j){
   piv<-sol[i,]
   sol[i,]<-sol[j,]
   sol[j,]<-piv
   return(sol)
 }
+
+
+insert<-function(sol,i,j){
+  piv<-sol
+  
+  if (i < j){
+    for (k in i:j){
+      sol[k] <-sol[k+1]
+    }
+  } else{
+    inicio <- j + 1
+    for (k in inicio:i){
+      if(k!=1){
+        sol[k] <- piv [k-1]
+      }
+    }
+  }
+  sol[j] <- piv[i]
+  return(sol)
+}
+
 
 # Asumimos que la instancia es una matriz de largo nxn
 evaluarFJS<-function(instancia, jobs, machines){
@@ -56,7 +80,9 @@ evaluarFJS<-function(instancia, jobs, machines){
   }
   return(matrixTimings[jobs, 2*machines])
 }
-instancia = readFJS("data2.dat")
+
+instancia = readFJS("data4.dat")
 instancia
+
 evaluarFJS(instancia$f, instancia$n, instancia$m)
 
