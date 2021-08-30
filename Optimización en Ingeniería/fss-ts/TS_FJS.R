@@ -110,8 +110,8 @@ TS_FJS<-function(filename, tiempoLocal, tiempoEspacio, intensidad, mCorto, mLarg
           if(ij_ > (largo)){
             ij_ = ij_ - largo*factorij +1
           }
-          #vecino<-swap(sol,i_, ij_)
-          vecino<-insert(sol,i_, ij_)
+          vecino<-swap(sol,i_, ij_)
+          #vecino<-insert(sol,i_, ij_)
           Cvecino<-evaluarFJS(vecino, instancia$n, instancia$m)
           sv[i] <- Cvecino
         }
@@ -131,7 +131,7 @@ TS_FJS<-function(filename, tiempoLocal, tiempoEspacio, intensidad, mCorto, mLarg
           #prohibición
           tabu_short[pos,j_] = t_corto
           tabu_short = apply(tabu_short,c(1, 2), restar)
-          sol <-insert(sol,pos, j_)
+          sol <-swap(sol,pos, j_)
           tabu_long = p$tsm
           soluciones<-c(soluciones,p$fit)
           tLocal <- tLocal + 1
@@ -151,6 +151,6 @@ TS_FJS<-function(filename, tiempoLocal, tiempoEspacio, intensidad, mCorto, mLarg
   return(list(ts = tabu_short, sol = sol, fit = e, tsm = tabu_long))
 }
 
-a = TS_FJS('data4.dat', tiempoLocal = 5 , tiempoEspacio = 8, intensidad = 20, mCorto = 5, mLargo = 50, penalizacion = 0.5, nVecinos =  20)
+a = TS_FJS('data2.dat', tiempoLocal = 5 , tiempoEspacio = 8, intensidad = 10, mCorto = 5, mLargo =30, penalizacion = 0.5, nVecinos =  10)
 a$fit
 
